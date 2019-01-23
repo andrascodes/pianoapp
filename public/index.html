@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>Piano</title>
+  </head>
+
+  <body>
+    <div class="piano">
+      <button id="KeyC" class="white"></button>
+      <button id="KeyD" class="white"></button>
+      <button id="KeyE" class="white"></button>
+      <button id="KeyF" class="white"></button>
+      <button id="KeyG" class="white"></button>
+      <button id="KeyA" class="white"></button>
+      <button id="KeyB" class="white"></button>
+
+      <button id="KeyC#" class="black"></button>
+      <button id="KeyD#" class="black black2"></button>
+      <button id="KeyF#" class="black black3"></button>
+      <button id="KeyG#" class="black black4"></button>
+      <button id="KeyA#" class="black black5"></button>
+    </div>
+
+    <audio id="C" src="./sounds/C.mp3"></audio>
+    <audio id="C#" src="./sounds/C_Sharp.mp3"></audio>
+    <audio id="D" src="./sounds/D.mp3"></audio>
+    <audio id="D#" src="./sounds/D_Sharp.mp3"></audio>
+    <audio id="E" src="./sounds/E.mp3"></audio>
+    <audio id="F" src="./sounds/F.mp3"></audio>
+    <audio id="F#" src="./sounds/F_Sharp.mp3"></audio>
+    <audio id="G" src="./sounds/G.mp3"></audio>
+    <audio id="G#" src="./sounds/G_Sharp.mp3"></audio>
+    <audio id="A" src="./sounds/A.mp3"></audio>
+    <audio id="A#" src="./sounds/A_Sharp.mp3"></audio>
+    <audio id="B" src="./sounds/B.mp3"></audio>
+  </body>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+
+  <script>
+    const socket = io();
+    let LOADED = false;
+
+    const noteSounds = {
+      C: document.getElementById("C"),
+      "C#": document.getElementById("C#"),
+      D: document.getElementById("D"),
+      "D#": document.getElementById("D#"),
+      E: document.getElementById("E"),
+      F: document.getElementById("F"),
+      "F#": document.getElementById("F#"),
+      G: document.getElementById("G"),
+      "G#": document.getElementById("G#"),
+      A: document.getElementById("A"),
+      "A#": document.getElementById("A#"),
+      B: document.getElementById("B")
+    };
+
+    window.onload = () => {
+      LOADED = true;
+    };
+
+    socket.on("prompt", data => {
+      if (!LOADED) {
+        return;
+      }
+      console.log(data);
+      const noteSound = noteSounds[data.text];
+      noteSound.currentTime = 0;
+      noteSound.play().catch(e => {
+        noteSound.play();
+      });
+    });
+
+    const keyPress = key => event => {
+      if (!LOADED) {
+        return;
+      }
+      const button = event.target;
+      button.classList.add("pressed");
+      const noteSound = noteSounds[key];
+      noteSound.currentTime = 0;
+      noteSound.play().catch(e => {
+        noteSound.play();
+      });
+
+      socket.emit("press", { key });
+    };
+
+    const keyUnpress = event => {
+      if (!LOADED) {
+        return;
+      }
+      const button = event.target;
+      button.classList.remove("pressed");
+    };
+
+    document
+      .getElementById("KeyC")
+      .addEventListener("touchstart", keyPress("C"));
+    document.getElementById("KeyC").addEventListener("touchend", keyUnpress);
+
+    document
+      .getElementById("KeyD")
+      .addEventListener("touchstart", keyPress("D"));
+    document.getElementById("KeyD").addEventListener("touchend", keyUnpress);
+
+    document
+      .getElementById("KeyE")
+      .addEventListener("touchstart", keyPress("E"));
+    document.getElementById("KeyE").addEventListener("touchend", keyUnpress);
+
+    document
+      .getElementById("KeyF")
+      .addEventListener("touchstart", keyPress("F"));
+    document.getElementById("KeyF").addEventListener("touchend", keyUnpress);
+
+    document
+      .getElementById("KeyG")
+      .addEventListener("touchstart", keyPress("G"));
+    document.getElementById("KeyG").addEventListener("touchend", keyUnpress);
+
+    document
+      .getElementById("KeyA")
+      .addEventListener("touchstart", keyPress("A"));
+    document.getElementById("KeyA").addEventListener("touchend", keyUnpress);
+
+    document
+      .getElementById("KeyB")
+      .addEventListener("touchstart", keyPress("B"));
+    document.getElementById("KeyB").addEventListener("touchend", keyUnpress);
+
+    document
+      .getElementById("KeyC#")
+      .addEventListener("touchstart", keyPress("C#"));
+    document.getElementById("KeyC#").addEventListener("touchend", keyUnpress);
+
+    document
+      .getElementById("KeyD#")
+      .addEventListener("touchstart", keyPress("D#"));
+    document.getElementById("KeyD#").addEventListener("touchend", keyUnpress);
+
+    document
+      .getElementById("KeyF#")
+      .addEventListener("touchstart", keyPress("F#"));
+    document.getElementById("KeyF#").addEventListener("touchend", keyUnpress);
+
+    document
+      .getElementById("KeyG#")
+      .addEventListener("touchstart", keyPress("G#"));
+    document.getElementById("KeyG#").addEventListener("touchend", keyUnpress);
+
+    document
+      .getElementById("KeyA#")
+      .addEventListener("touchstart", keyPress("A#"));
+    document.getElementById("KeyA#").addEventListener("touchend", keyUnpress);
+  </script>
+</html>
