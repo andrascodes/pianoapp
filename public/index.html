@@ -29,18 +29,54 @@
       <button id="KeyA#" class="black black5"></button>
     </div>
 
-    <audio id="C" src="./sounds/C.mp3"></audio>
-    <audio id="C#" src="./sounds/C_Sharp.mp3"></audio>
-    <audio id="D" src="./sounds/D.mp3"></audio>
-    <audio id="D#" src="./sounds/D_Sharp.mp3"></audio>
-    <audio id="E" src="./sounds/E.mp3"></audio>
-    <audio id="F" src="./sounds/F.mp3"></audio>
-    <audio id="F#" src="./sounds/F_Sharp.mp3"></audio>
-    <audio id="G" src="./sounds/G.mp3"></audio>
-    <audio id="G#" src="./sounds/G_Sharp.mp3"></audio>
-    <audio id="A" src="./sounds/A.mp3"></audio>
-    <audio id="A#" src="./sounds/A_Sharp.mp3"></audio>
-    <audio id="B" src="./sounds/B.mp3"></audio>
+    <audio id="C" preload="auto">
+      <source src="./sounds/C.mp3" />
+      <source src="./sounds/C.ogg" />
+    </audio>
+    <audio id="C#" preload="auto">
+      <source src="./sounds/C_Sharp.mp3" />
+      <source src="./sounds/C_Sharp.ogg" />
+    </audio>
+    <audio id="D" preload="auto">
+      <source src="./sounds/D.mp3" />
+      <source src="./sounds/D.ogg" />
+    </audio>
+    <audio id="D#" preload="auto">
+      <source src="./sounds/D_Sharp.mp3" />
+      <source src="./sounds/D_Sharp.ogg" />
+    </audio>
+    <audio id="E" preload="auto">
+      <source src="./sounds/E.mp3" />
+      <source src="./sounds/E.ogg" />
+    </audio>
+    <audio id="F" preload="auto">
+      <source src="./sounds/F.mp3" />
+      <source src="./sounds/F.ogg" />
+    </audio>
+    <audio id="F#" preload="auto">
+      <source src="./sounds/F_Sharp.mp3" />
+      <source src="./sounds/F_Sharp.ogg" />
+    </audio>
+    <audio id="G" preload="auto">
+      <source src="./sounds/G.mp3" />
+      <source src="./sounds/G.ogg" />
+    </audio>
+    <audio id="G#" preload="auto">
+      <source src="./sounds/G_Sharp.mp3" />
+      <source src="./sounds/G_Sharp.ogg" />
+    </audio>
+    <audio id="A" preload="auto">
+      <source src="./sounds/A.mp3" />
+      <source src="./sounds/A.ogg" />
+    </audio>
+    <audio id="A#" preload="auto">
+      <source src="./sounds/A_Sharp.mp3" />
+      <source src="./sounds/A_Sharp.ogg" />
+    </audio>
+    <audio id="B" preload="auto">
+      <source src="./sounds/B.mp3" />
+      <source src="./sounds/B.ogg" />
+    </audio>
   </body>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
@@ -75,9 +111,7 @@
       console.log(data);
       const noteSound = noteSounds[data.text];
       noteSound.currentTime = 0;
-      noteSound.play().catch(e => {
-        noteSound.play();
-      });
+      noteSound.play().catch(e => {});
     });
 
     const keyPress = key => event => {
@@ -88,9 +122,7 @@
       button.classList.add("pressed");
       const noteSound = noteSounds[key];
       noteSound.currentTime = 0;
-      noteSound.play().catch(e => {
-        noteSound.play();
-      });
+      noteSound.play().catch(e => {});
 
       socket.emit("press", { key });
     };
