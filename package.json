@@ -1,0 +1,22 @@
+{
+  "name": "pianoapp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:andrewszucs/pianoapp.git",
+  "author": "Andrew Szucs <andrew0szucs@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "foreman": "^3.0.1",
+    "localtunnel": "^1.9.1",
+    "nodemon": "^1.18.9"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "NODE_ENV=development ./node_modules/.bin/nodemon index.js",
+    "devlt": "./node_modules/.bin/nf start -j Procfiledevlt"
+  }
+}
