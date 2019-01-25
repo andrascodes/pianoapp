@@ -36,6 +36,11 @@ body {
   -ms-user-select: none;
   user-select: none;
 }
+
+.white:first-child {
+  margin-left: 0;
+}
+
 .white.pressed {
   box-shadow: inset 0 -10px 30px -3px grey;
 }
@@ -47,11 +52,11 @@ body {
 .black {
   position: absolute;
   height: 75vh;
-  width: 65px;
+  width: 95px;
   z-index: 99;
   margin-top: 0;
   /* margin-left: -834px; */
-  margin-left: 11.33%;
+  margin-left: 9.67%;
   border: 1px solid black;
   box-shadow: inset 0 0 10px 5px gray;
   background: linear-gradient(to bottom, gray 0%, black 100%);
@@ -77,17 +82,17 @@ body {
 }
 
 .black2 {
-  margin-left: 25.66%;
+  margin-left: 24%;
 }
 
 .black3 {
-  margin-left: 54.33%;
+  margin-left: 52.5%;
 }
 
 .black4 {
-  margin-left: 68.67%;
+  margin-left: 67%;
 }
 
 .black5 {
-  margin-left: 83%;
+  margin-left: 81.33%;
 }
